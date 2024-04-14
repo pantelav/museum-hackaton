@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="relative">
+    <q-badge color="blue absolute z-50 top-0">
+      {{ getTypeId }}
+    </q-badge>
     <img
       :src="targetItem.imageUrl"
       alt="gun"
@@ -27,12 +30,17 @@
       bg-color="white"
       class="mt-2"
     />
-    <q-btn color="secondary" label="Сохранить" class="w-full mt-2" @click="$router.push('/items')"/>
+    <q-btn
+      color="secondary"
+      label="Сохранить"
+      class="w-full mt-2"
+      @click="$router.push('/items')"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, inject, computed } from 'vue'
+import { reactive, onMounted, inject, computed } from 'vue'
 import { config } from '../../config'
 import { useItemStore } from 'src/stores/items'
 import type { IReqItem } from '../../types/items'
@@ -63,11 +71,11 @@ const getTypeId = computed(() => {
 })
 
 onMounted(() => {
-  // if (itemStore.targetItem) return
-  // const lsItem = localStorage.getItem('target-item')
-  // if (!lsItem) return
-  // itemStore.setTarget(JSON.parse(lsItem))
-  // setData()
+  if (itemStore.targetItem) return
+  const lsItem = localStorage.getItem('target-item')
+  if (!lsItem) return
+  itemStore.setTarget(JSON.parse(lsItem))
+  setData()
 })
 
 function setData() {

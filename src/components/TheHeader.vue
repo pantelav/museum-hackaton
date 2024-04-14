@@ -3,13 +3,14 @@
     class="container h-full mx-auto flex items-center justify-between gap-10"
   >
     <div class="flex gap-10">
-      <router-link
-        class="transition-colors hover:text-[#a89c74]"
-        v-for="link in headerLinks"
-        :key="link.title"
-        :to="link.to"
-        >{{ link.title }}</router-link
-      >
+      <div v-for="link in headerLinks" :key="link.title">
+        <router-link
+          class="transition-colors hover:text-[#a89c74]"
+          :to="link.to"
+          ><q-icon :name="link.icon" class="pr-1" />
+          {{ link.title }}</router-link
+        >
+      </div>
     </div>
     <p class="text-h6">Экспонатов в базе: {{ counter }}</p>
   </div>
@@ -20,8 +21,8 @@ import { api } from 'src/boot/axios'
 import { ref, onMounted } from 'vue'
 
 const headerLinks = [
-  { title: 'Поиск по каталогу', to: '/' },
-  { title: 'Каталог', to: '/items' },
+  { title: 'Поиск по каталогу', to: '/', icon: 'search' },
+  { title: 'Каталог', to: '/items', icon: 'menu_book' },
 ]
 
 const counter = ref(0)
