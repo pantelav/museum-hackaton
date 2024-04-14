@@ -20,6 +20,7 @@
         <q-icon name="search" />
       </template>
       <template #append>
+        <q-spinner color="primary" size="1em" class="mr-2" v-if="itemStore.processSearch"/>
         <q-icon
           name="add_photo_alternate"
           color="secondary"
@@ -73,6 +74,7 @@ async function uploadFile() {
 
 function submitForm() {
   if (!searchQuery.value) return
+  itemStore.processSearch = true
   itemStore.textQuery = searchQuery.value
   emit('find')
   if (route.path === '/') router.push('/items?search=true')

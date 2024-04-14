@@ -5,10 +5,9 @@
       alt="gun"
       class="w-full object-contain max-h-[40vh]"
     />
-    <q-select
+    <q-input
       outlined
-      v-model="dropdown"
-      :options="classes"
+      v-model="getTypeId"
       label="Класс экспоната"
       bg-color="white"
       class="mt-2"
@@ -32,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, inject } from 'vue'
+import { ref, reactive, onMounted, inject, computed } from 'vue'
 import { config } from '../../config'
 import { useItemStore } from 'src/stores/items'
 import type { IReqItem } from '../../types/items'
@@ -51,19 +50,23 @@ const targetItem = reactive<IReqItem & { imageUrl: string }>({
   exh_id: itemStore.targetItem?.exh_id || 0,
   id: itemStore.targetItem?.id || '',
   timestamp: itemStore.targetItem?.timestamp || 0,
-  type_id: itemStore.targetItem?.type_id || -1,
+  type_id: itemStore.targetItem?.type_id || '',
   imageUrl: config.getImageSrc(itemStore.targetItem?.id || ''),
 })
 
-const dropdown = ref(null)
-const classes = ['Оружие', 'Картина', 'Статуя', 'Посуда', 'Документ', 'Монета']
+const getTypeId = computed(() => {
+  if (Array.isArray(targetItem.type_id)) {
+    return targetItem.type_id[4]
+  }
+  return targetItem.type_id
+})
 
 onMounted(() => {
-  if (itemStore.targetItem) return
-  const lsItem = localStorage.getItem('target-item')
-  if (!lsItem) return
-  itemStore.setTarget(JSON.parse(lsItem))
-  setData()
+  // if (itemStore.targetItem) return
+  // const lsItem = localStorage.getItem('target-item')
+  // if (!lsItem) return
+  // itemStore.setTarget(JSON.parse(lsItem))
+  // setData()
 })
 
 function setData() {
@@ -72,7 +75,7 @@ function setData() {
   targetItem.exh_id = itemStore.targetItem?.exh_id || 0
   targetItem.id = itemStore.targetItem?.id || ''
   targetItem.timestamp = itemStore.targetItem?.timestamp || 0
-  targetItem.type_id = itemStore.targetItem?.type_id || -1
+  targetItem.type_id = itemStore.targetItem?.type_id || ''
   targetItem.imageUrl = config.getImageSrc(itemStore.targetItem?.id || '')
 }
 </script>

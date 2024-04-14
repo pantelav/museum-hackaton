@@ -1,5 +1,8 @@
 <template>
-  <q-card class="w-[300px] h-[450px] overflow-hidden text-ellipsis">
+  <q-card class="w-[300px] h-[450px] overflow-hidden text-ellipsis relative">
+    <q-badge color="blue absolute z-50 top-0">
+      {{ props.data.type_id }}
+    </q-badge>
     <q-img
       class="w-[300px] h-[200px] object-contain"
       :src="config.getImageSrc(props.data.id)"

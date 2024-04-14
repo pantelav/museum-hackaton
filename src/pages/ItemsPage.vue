@@ -76,6 +76,7 @@ async function getMoreItems(idx, done) {
 
 async function findItemsByText() {
   try {
+    itemStore.processSearch = true
     const { data } = await api.post('/exhibits/find_by_text', {
       text: itemStore.textQuery,
     })
@@ -83,6 +84,8 @@ async function findItemsByText() {
     textSearchMode.value = true
   } catch (error) {
     console.log(error)
+  } finally {
+    itemStore.processSearch = false
   }
 }
 

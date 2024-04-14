@@ -6,11 +6,12 @@ export const useItemStore = defineStore('target-item', () => {
   const targetItem = ref<IReqItem>()
   const searchingItem = ref<IFoundedItem>()
   const textQuery = ref('')
+  const processSearch = ref(false)
 
   function setTarget(item: IReqItem) {
     localStorage.setItem('target-item', JSON.stringify(item))
     targetItem.value = item
   }
 
-  return { targetItem, setTarget, searchingItem, textQuery }
+  return { targetItem, setTarget, searchingItem, textQuery, processSearch }
 })
