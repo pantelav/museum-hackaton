@@ -27,6 +27,7 @@
       bg-color="white"
       class="mt-2"
     />
+    <q-btn color="secondary" label="Сохранить" class="w-full mt-2" @click="$router.push('/items')"/>
   </div>
 </template>
 
