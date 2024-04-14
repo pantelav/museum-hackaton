@@ -2,6 +2,7 @@
 
 DoberTeam hackaton april 2024
 
+![preview](https://raw.githubusercontent.com/pantelav/museum-hackaton/master/src/assets/img/screen.png)
 ## Install the dependencies
 ```bash
 yarn
